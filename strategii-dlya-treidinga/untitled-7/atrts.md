@@ -1,40 +1,38 @@
 # ATRTS
 
-This page describes how margin trading on Bitmex works with the ATRTS strategy. The triggers for trades are slightly different than in the same strategy for regular trading.
+На этой странице описано, как маржинальная торговля на Bitmex работает со стратегией ATRTS. Триггеры для сделок немного отличаются от той же стратегии для обычной торговли.
 
-## How to work with this strategy <a id="how-to-work-with-this-strategy"></a>
+## Как работать с этой стратегией <a id="how-to-work-with-this-strategy"></a>
 
-**Expected behavior for margin trading**
+**Ожидаемое поведение для маржинальной торговли**
 
-Gunbot will open one position, either long or short, and close this position when the target is reached. When the stop is hit before profitably closing a trade, Gunbot will place a stop order at loss. After closing a position, Gunbot will again look to open a new long or short position. Gunbot will not add to existing open positions.
+Gunbot откроет одну позицию, длинную или короткую, и закроет эту позицию, когда цель будет достигнута. Когда срабатывает стоп до прибыльного закрытия сделки, Gunbot выставит стоп-ордер на убыток. После закрытия позиции Gunbot снова попытается открыть новую длинную или короткую позицию. Gunbot не добавит к существующим открытым позициям.
 
-Please don't manually add to or reduce positions opened by Gunbot, unless you stop running Gunbot on this trading pair until you've closed this position.
+Пожалуйста, не добавляйте и не уменьшайте позиции, открытые Gunbot вручную, если только вы не прекратите запуск Gunbot на этой торговой паре, пока не закроете эту позицию.
 
 ​
 
 ### Long / Buy <a id="long-buy"></a>
 
-A long position is opened when the ask price crosses over ATR long value from the previous round.
+Длинная позиция открывается, когда цена Ask пересекает длинное значение ATR предыдущего раунда.
 
 ### Short / Sell <a id="short-sell"></a>
 
-A short position is opened when the bid price crosses under ATR short value from the previous round.
+Короткая позиция открывается, когда цена предложения пересекает значение ATR по сравнению с предыдущим раундом.
 
 ### Close <a id="close"></a>
 
-A position is closed when the desired `ROE` is reached.
+Позиция закрывается при достижении желаемой `ROE`.
 
 ### Stop <a id="stop"></a>
 
-A position is closed at loss when `STOP_BUY` or `STOP_SELL` is reached.
+Позиция закрывается с убытком при достижении `STOP_BUY`или `STOP_SELL`.
 
-## Strategy parameters <a id="strategy-parameters"></a>
+## Параметры Стратегий <a id="strategy-parameters"></a>
 
-Following settings options are available for `ATRTS` and can be set in the strategy configurator of the GUI or the strategies section of the config.js file.
+Эти настройки являются глобальными и применяются ко всем парам, использующим эту стратегию. Если вы хотите, чтобы определенный параметр отличался для одной или нескольких пар, используйте [переопределение ](../../kak-rabotat-s-gunbot/untitled-1/trading-pairs.md#override-settings-pereopredelenie-nastroiki)на уровне пары.
 
-These settings are global and apply to all pairs running this strategy. When you want a specific parameter to be different for one or more pairs, use an [override](https://github.com/GuntharDeNiro/BTCT/wiki/Gunbot-settings#overrides) at the pair level.
-
-Using the `BUY_METHOD` and `SELL_METHOD` parameters you can combine different methods for buying and selling. This strategy page assumes both `BUY_METHOD` and `SELL_METHOD` are set to `ATRTS`. Accepted values are all strategy names as listed [here](https://github.com/GuntharDeNiro/BTCT/wiki/About-Gunbot-strategies).
+Используя параметры `BUY_METHOD`и `SELL_METHOD`, вы можете комбинировать различные методы покупки и продажи. На этой странице стратегии предполагается, что для `BUY_METHOD`и `SELL_METHOD`установлены значения `ATRTS`. Допустимые значения - это имена стратегий, перечисленные [здесь](../../#yarlyki-k-opisaniyam-strategii).
 
 ## Margin settings <a id="margin-settings"></a>
 
